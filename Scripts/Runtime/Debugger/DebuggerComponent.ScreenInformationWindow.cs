@@ -66,7 +66,11 @@ namespace UnityGameFramework.Runtime
 
             private string GetResolutionString(Resolution resolution)
             {
-                return Utility.Text.Format("{0} x {1} @ {2}Hz", resolution.width, resolution.height, resolution.refreshRate);
+#if UNITY_2022_1_OR_NEWER
+                return Utility.Text.Format("{0} x {1} @ {2}Hz", resolution.width.ToString(), resolution.height.ToString(), resolution.refreshRateRatio.numerator.ToString());
+#else
+                return Utility.Text.Format("{0} x {1} @ {2}Hz", resolution.width.ToString(), resolution.height.ToString(), resolution.refreshRate.ToString());
+#endif
             }
 
             private string GetCutoutsString(Rect[] cutouts)

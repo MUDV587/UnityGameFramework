@@ -102,7 +102,11 @@ namespace UnityGameFramework.Runtime
                 return;
             }
 
+#if UNITY_2022_1_OR_NEWER
+            m_UnityWebRequest = UnityWebRequest.Post(webRequestUri, Utility.Converter.GetString(postData), "application/json");
+#else
             m_UnityWebRequest = UnityWebRequest.Post(webRequestUri, Utility.Converter.GetString(postData));
+#endif
 #if UNITY_2017_2_OR_NEWER
             m_UnityWebRequest.SendWebRequest();
 #else
