@@ -43,7 +43,8 @@
 - `GameFramework.prefab(+.meta)`（根目录）—— 被 `Prefabs/GameFramework.prefab`（新序列化格式）取代
 - `README.md` —— 与核包 README 内容一致，不重复引入
 - `README.md.meta` —— 孤立元数据
-- `LICENSE.md`（2021 版）—— 保留（两上游仓内容一致；核包侧仅保留 2013-2020 旧版授权）
+
+`LICENSE.md`（2021 版）**未**移除，随包保留（两上游仓内容一致；核包侧仅保留 2013-2020 旧版授权）。
 
 ## 四、UPM 化新增
 
