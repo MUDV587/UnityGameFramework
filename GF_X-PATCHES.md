@@ -30,11 +30,11 @@
 |---|---|---|---|
 | 11 | 🆕 `Prefabs/GameFramework.prefab` | 新序列化格式重写（`m_CorrespondingSourceObject` 等），组件/脚本引用内容与上游一致；随包提供 | `fcaeff9` 2023-07-20 |
 | 12 | `Scripts/Runtime/UnityGameFramework.Runtime.asmdef` | 完整序列化（`rootNamespace`/`allowUnsafeCode` 等）+ 以 **GUID** 引用 `GameFramework`（`282a0a72b3151df4394127349e04dbbe`） | GF_X 工程提交 `b87fda5` 等 2024-03~08 |
-| 13 | `Scripts/Editor/UnityGameFramework.Editor.asmdef` | 同上，`references` 另加 `GameFramework`（**名字**引用） | 同上 |
+| 13 | `Scripts/Editor/UnityGameFramework.Editor.asmdef` | 同上，`references` 另加 `GameFramework`（**GUID** 引用，与 runtime 风格统一） | 同上 |
 | 14 | `package.json` | 依赖重写为核包模型（`com.jiangyin.gameframework 2025.7.10` + 7 modules）；版本 `2025.7.10`；`repository.url` 指本 fork；`revision` 更正为 `e7eb3ef…`（原 `9e04764c…` 为 master 祖先，已过时） | `3077133` + T4/T4.5 |
 | 15 | `package.json.meta`、`LICENSE.md.meta` | 仅 `guid:` 行不同（Unity 实例标识） | — |
 
-已知问题（保留现状，待统一处理）：runtime asmdef 用 **GUID** 引用 GF，editor asmdef 用**名字**引用——风格不一致；`Type.cs` 扫描名单硬编码 GF_X 专有程序集名。见主仓库 `Docs/T10-WorkingTree-Review.md`。
+已知问题：`Type.cs` 扫描名单硬编码 GF_X 专有程序集名（`GF_X.Runtime`/`GF_X.Editor`）——功能依赖（Inspector Helper 下拉、ResourceBuilder IBuildEventHandler 发现），保留现状，见主仓库 `Docs/T10-WorkingTree-Review.md`。asmdef 引用风格（runtime GUID / editor 名字）已于 2026-11-18 统一为 GUID 引用。
 
 ## 三、相对上游移除的文件
 
