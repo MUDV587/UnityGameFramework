@@ -26,6 +26,7 @@
 | 11 | `Scripts/Runtime/UI/UIComponent.cs` | ✨🆕 `public Transform InstanceRoot => m_InstanceRoot;`（懒创建字段只读公开，供 ugfx `AppSettings` Inspector 使用） | `ebc2837` 2026-11-19 |
 | 12 | `Scripts/Editor/Misc/Type.cs` | `internal static class Type` → `public static class Type`；`internal static string GetConfigurationPath<T>()` → `public`（供 ugfx 构建管线直接调用，替代反射私有 API） | `ebc2837` 2026-11-19 |
 | 13 | `Scripts/Editor/ResourceEditor/ResourceEditor.cs` | `private static void Open()` → `internal static void Open()`；🆕 配套新增 `ResourceEditorWindow.cs`（public 门面 `ResourceEditorWindow.Open()`） | `ebc2837` 2026-11-19 |
+| 14 | 🆕 `Scripts/Runtime/Resource/ResourceComponent.cs` | ✨🆕 `public void SetResourceModePreInit(ResourceMode resourceMode)`（预初始化阶段写字段，不触碰 ResourceManager；供 ugfx Bootstrap 在 `ResourceComponent.Start` 之前设资源模式，替代反射 `m_ResourceMode`） | 2026-11-19（本次提交） |
 
 ## 二、集成/脚手架变更
 
@@ -60,6 +61,7 @@
 1. 先按 `--ff-only` 同步 `master`（fork 默认分支，禁止人工提交），再 `master` → `feature-upm` 合并。
 2. 补丁重灾区：
    - `Editor/Misc/Type.cs`（程序集扫描名单——上游若改动需与 `GF_X.Runtime`/`GF_X.Editor` 名单合并；另含 `Type` 改为 public 类、`GetConfigurationPath<T>()` 改为 public，上游若改内部类名或方法签名将编译失败，合并时必须评估）
+   - `Resource/ResourceComponent.cs`（含 🆕 public `SetResourceModePreInit`，预初始化资源模式写入——ugfx Bootstrap 反射→公开 API 迁移，上游若改名/改签名将编译失败）
    - `UI/UIComponent.cs`（含 🆕 public `InstanceRoot` 属性）、`ResourceEditor/ResourceEditor.cs`（`Open()` 改 internal）与 🆕 `ResourceEditor/ResourceEditorWindow.cs`（public 门面，上游无此文件，git 不会冲突）
    - 兼容性补丁全部是条件编译块（`#if UNITY_*`），冲突概率低
    - WebGL 直读两处（`DefaultLoadResourceAgentHelper.cs`、`DefaultResourceHelper.cs`）

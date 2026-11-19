@@ -715,6 +715,16 @@ namespace UnityGameFramework.Runtime
         }
 
         /// <summary>
+        /// 预初始化阶段设置资源模式。由 ugfx Bootstrap 在组件 Start 之前调用，
+        /// 仅写字段不触碰 ResourceManager（此时 ResourceManager 尚未创建）。
+        /// </summary>
+        /// <param name="resourceMode">资源模式。</param>
+        public void SetResourceModePreInit(ResourceMode resourceMode)
+        {
+            m_ResourceMode = resourceMode;
+        }
+
+        /// <summary>
         /// 设置资源模式。
         /// </summary>
         /// <param name="resourceMode">资源模式。</param>
