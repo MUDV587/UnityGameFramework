@@ -85,6 +85,17 @@ namespace UnityGameFramework.Runtime
         }
 
         /// <summary>
+        /// 获取界面实例的根节点（懒创建，首次 UI 组件初始化后非空）。
+        /// </summary>
+        public Transform InstanceRoot
+        {
+            get
+            {
+                return m_InstanceRoot;
+            }
+        }
+
+        /// <summary>
         /// 获取或设置界面实例对象池自动释放可释放对象的间隔秒数。
         /// </summary>
         public float InstanceAutoReleaseInterval

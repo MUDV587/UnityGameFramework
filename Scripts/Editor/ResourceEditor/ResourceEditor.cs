@@ -45,7 +45,7 @@ namespace UnityGameFramework.Editor.ResourceTools
         private int m_CurrentSourceRowOnDraw = 0;
 
         [MenuItem("Game Framework/Resource Tools/Resource Editor", false, 41)]
-        private static void Open()
+        internal static void Open()
         {
             ResourceEditor window = GetWindow<ResourceEditor>("Resource Editor", true);
             window.minSize = new Vector2(1400f, 600f);
